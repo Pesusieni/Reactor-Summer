@@ -1,0 +1,11 @@
+<html>
+  <head>
+  </head>
+  <body>
+    {% if photo %}
+    <img src="{{ photo.image_field.url }}">
+    {% else ‰}
+    <img src="static/img/owl_angry.jpg">
+    {% endif %}
+    </body>
+</html>
