@@ -1,0 +1,15 @@
+{% extends "photo/base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+  <div class="front">
+    <h1>Reactor</h1>
+    {{picture}}
+      {% if picture != None %}
+      <li></li>
+      {% else %}
+      <img src="{% static "img/owl_angry.jpg" %}">
+      {% endif %}
+  </div>
+{% endblock content %}

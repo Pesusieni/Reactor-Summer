@@ -1,0 +1,13 @@
+{% extends "photo/base.html" %}
+
+{% block content %}
+<form method="post" action="" id="uploadform">
+    {{ form.management_form }}
+        {% for field in form %}
+            <br>{{ field.label_tag }} <br>{{ field }}
+
+
+    {% endfor %}
+</form>
+<button type ="submit"form="uploadform">Upload</button>
+{% endblock content %}
