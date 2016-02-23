@@ -7,7 +7,7 @@
     <h1>Reactor</h1>
     {{picture}}
       {% if picture != None %}
-      <li></li>
+      <img src="{{picture.image.url}}"/>
       {% else %}
       <img src="{% static "img/owl_angry.jpg" %}">
       {% endif %}
