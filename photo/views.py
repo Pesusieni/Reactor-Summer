@@ -34,14 +34,15 @@ def photo(request,picture_id):
 def upload(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST,request.FILES)
-        print(request.POST)
         if form.is_valid():
-            form.clean_tag_list()
-            tempform = form.save(commit=False)
-            tempform.save()
-            form = form.save_m2m()
-            print(tempform)
-            return HttpResponseRedirect(reverse(photo, args=[tempform.pk]))
+            tempdata = form.clean_tag_list()
+            temp = form.save(commit=False)
+            temp.save()
+            print(temp)
+            for item in tempdata:
+                temp.tags.add(item)
+            form.save_m2m()
+            return HttpResponseRedirect(reverse(photo, args=[temp.pk]))
         else:
             print(form.errors)
 

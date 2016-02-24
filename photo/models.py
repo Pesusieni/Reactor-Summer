@@ -1,6 +1,5 @@
 from django.db import models
 from django.forms import ModelForm , CharField
-# Create your models here.
 
 class Tag(models.Model):
     name = models.CharField(unique=True,max_length=20)
@@ -11,7 +10,7 @@ class Tag(models.Model):
 class Photo(models.Model):
     title = models.CharField(max_length=25)
     description = models.TextField(null=True,blank=True)
-    tags_list = models.ManyToManyField(Tag,blank=True)
+    tags = models.ManyToManyField(Tag,blank=True)
     uploader = models.CharField(max_length=25)
     timestamp = models.DateTimeField(auto_now_add=True,blank=True)
     image = models.ImageField(upload_to='photos/')
@@ -29,16 +28,16 @@ class PhotoForm(ModelForm):
     class Meta:
         model = Photo
         fields = ['title','description','uploader','image']
-    def clean_tags(self):
-        data = self.cleaned_data['tags_list']
-        data = data.spli[',']
     def clean_tag_list(self):
         data = self.cleaned_data
         tags_list = data.get('tags_list', None)
+        temp = []
         if tags_list is not None:
+            tags_list = tags_list.lower()
             for tag_name in tags_list.split(','):
                 try:
                     tag = Tag.objects.get(name=tag_name)
                 except Tag.DoesNotExist:
-                    Tag(name=tag_name).save()
-        return tags_list
+                    tag = Tag(name=tag_name).save()
+                temp.append(tag)
+        return temp

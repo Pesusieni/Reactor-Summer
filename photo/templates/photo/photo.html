@@ -1,6 +1,15 @@
 {% extends "photo/base.html" %}
 {% block content %}
-<p>{{photo.image}}</p>
-<h1>Cant find it {{photo.image.url}}</h1>
+{{photo.tags_list.all}}
+<h1>{{photo.title}}</h1>
 <img src="{{photo.image.url}}">
+<p>
+Tags associated with the picture  
+</p>
+<ul class="tags">
+{% for item in photo.tags.all %}
+  <li>{{item}}</li>
+{% endfor %}
+</ul>
+<p>{{photo.description}}</p>
 {% endblock content %}
