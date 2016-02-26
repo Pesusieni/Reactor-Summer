@@ -2,6 +2,7 @@
 {% block content %}
 <div class="search">
   <form class="searchform" action="" id="searchform" method="post">
+      {% csrf_token %}
     <input type="text" name="tags" maxlength="30">
     <button id="searchbutton" type ="submit" form="searchform">Search</button>
   </form>

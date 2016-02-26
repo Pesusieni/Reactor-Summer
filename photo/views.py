@@ -74,7 +74,24 @@ def about(request):
     return HttpResponse(template.render(context))
 def search(request):
     if request.method == "POST":
-        pass
+        data = request.POST['tags'].lower()
+        print(data)
+        if len(data)==0:
+            photos = Photo.objects.order_by('?')[:50]
+            template = loader.get_template('photo/photos.html')
+            context = RequestContext(request, {
+            'photos' : photos
+            })
+            return HttpResponse(template.render(context))
+        photos = Photo.objects
+        for item in data.split(','):
+            photos = photos.filter(tags__name=item)
+        photos = photos.order_by('timestamp')[:50]
+        template = loader.get_template('photo/photos.html')
+        context = RequestContext(request, {
+        'photos' : photos
+        })
+        return HttpResponse(template.render(context))
     else:
         pass
     template = loader.get_template('photo/search.html')

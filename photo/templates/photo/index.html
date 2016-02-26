@@ -5,8 +5,8 @@
 {% block content %}
   <div class="front">
     <h1>Reactor</h1>
-    {{picture}}
-      {% if picture != None %}
+    <p id="front">{{picture}}</p>
+        {% if picture != None %}
       <div class="picture">
       <img src="{{picture.image.url}}"/>
       {% else %}
