@@ -1,0 +1,13 @@
+{% extends "photo/base.html" %}
+{% block content %}
+<div class="search">
+  <form class="searchform" action="" id="searchform" method="post">
+    <input type="text" name="tags" maxlength="30">
+    <button id="searchbutton" type ="submit" form="searchform">Search</button>
+  </form>
+<div class="notes">
+<p>* Search Pictures by tags, use comma to search for multiple tags,if searching for multipletags union is assumed<p>
+
+</div>
+</div>
+{% endblock content %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from photo.models import Tag , Photo , Reply ,PhotoForm
+from photo.models import Tag , Photo , Reply ,PhotoForm,ReplyForm
 from django.http import HttpResponse, Http404, JsonResponse, HttpResponseForbidden,HttpResponseRedirect
 from django.template import RequestContext, loader
 from django.core.urlresolvers import reverse
@@ -23,12 +23,21 @@ def photo(request,picture_id):
         photo = Photo.objects.get(pk = picture_id)
     except:
         raise Http404
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            temp = form.save(commit = False)
+            temp.photo_id = picture_id
+            temp.save()
 
     reply_list = photo.reply_set.all()
     reply_list = reply_list.order_by('-timestamp')[:100]
+    replyform = ReplyForm()
     template = loader.get_template('photo/photo.html')
     context = RequestContext(request,{
-    'photo' : photo
+    'photo' : photo,
+    'replyform' : replyform,
+    'reply_list' : reply_list
     })
     return HttpResponse(template.render(context))
 def upload(request):
@@ -61,5 +70,14 @@ def about(request):
     template = loader.get_template('photo/about.html')
     context = RequestContext(request, {
 
+    })
+    return HttpResponse(template.render(context))
+def search(request):
+    if request.method == "POST":
+        pass
+    else:
+        pass
+    template = loader.get_template('photo/search.html')
+    context = RequestContext(request, {
     })
     return HttpResponse(template.render(context))

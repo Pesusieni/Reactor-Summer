@@ -1,15 +1,44 @@
 {% extends "photo/base.html" %}
 {% block content %}
 {{photo.tags_list.all}}
-<h1>{{photo.title}}</h1>
+<div class="picture">
 <img src="{{photo.image.url}}">
-<p>
-Tags associated with the picture  
-</p>
-<ul class="tags">
+</div>
+<div class="top">
+<a class="left">Title : {{photo.title}}</a>
+<a class="right">Uploader : {{photo.uploader}}</a>
+</div>
+<div class="tags">
+<p>Tags associated with the picture  </p>
 {% for item in photo.tags.all %}
-  <li>{{item}}</li>
+  <div class="tag">{{item}}</div>
 {% endfor %}
-</ul>
+</div>
+{% if photo.description %}
+<div class="description">
 <p>{{photo.description}}</p>
+</div>
+{% endif %}
+<div class="reply">
+  <h2>Replies</h2>
+{% for item in reply_list %}
+  <div>
+  <h3>Nick Name :{{item.nick_name}}</h3>
+  <p>{{item.reply}}</p>
+</div>
+{% endfor %}
+</div>
+<div class = "form">
+<form method="post" action="" id="replyform" enctype="multipart/form-data">
+  {% csrf_token %}
+    {{ replyform.management_form }}
+        {% for field in replyform %}
+            <h3>{{ field.label_tag }} </h3>{{ field }}
+
+
+    {% endfor %}
+    <button id="replybutton" type ="submit"form="replyform">Reply</button>
+</form>
+</div>
+
 {% endblock content %}

@@ -23,6 +23,11 @@ class Reply(models.Model):
     reply = models.TextField(max_length=400)
     timestamp = models.DateTimeField(auto_now_add=True)
     photo = models.ForeignKey(Photo)
+class ReplyForm(ModelForm):
+    class Meta:
+        model = Reply
+        fields = ['nick_name','reply']
+        
 class PhotoForm(ModelForm):
     tags_list = CharField(required=False,max_length=255)
     class Meta:

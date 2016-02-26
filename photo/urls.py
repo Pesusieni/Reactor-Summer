@@ -9,4 +9,6 @@ urlpatterns = patterns('',
     url(r'^upload/$', views.upload , name='photo.upload'),
     url(r'^about/$', views.about , name='photo.about'),
     url(r'^picture/(?P<picture_id>\d+)/$', views.photo, name='photo.photo'),
+    url(r'^search/$', views.search , name='photo.search'),
+
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

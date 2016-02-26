@@ -7,9 +7,11 @@
     <h1>Reactor</h1>
     {{picture}}
       {% if picture != None %}
+      <div class="picture">
       <img src="{{picture.image.url}}"/>
       {% else %}
       <img src="{% static "img/owl_angry.jpg" %}">
+    </div>
       {% endif %}
   </div>
 {% endblock content %}

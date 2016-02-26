@@ -25,9 +25,105 @@
 .active {
     background-color: #4CAF50;
 }
-img{
+.top > a{
+background-color: #4CAF50;
+width: 47%;
+margin: 1%;
+float: left;
+padding: 4px;
+border-radius: 5px;
+}
+.right{
+  float: right;;
+}
+
+.tags > p {
+  background-color: #333;
+  color: white;
+  text-align: center;;
+  font-size: 140%;
+
+}
+.description > p{
+  border: 4px solid #333;
+  border-radius: 10px;
+  text-indent: 4px;
+}
+.reply > h2 {
+  background-color: #333;
+  text-align: center;
+  color: white;
+}
+.reply > div {
+  border: 4px solid #333;
+  margin-bottom: 12px;
+  text-indent: 4px;
+}
+.reply > div > h3 {
+  background-color: #333;
+  color: white;
+  margin: 0px;
+
+}
+.form h3 {
+  display:inline-block;
+  margin: 0px;
+}
+#replyform h3:last-of-type{
+  float: right;
+  margin-right: 20px;
+}
+.form input{
+  display: inline-block;
+}
+.form textarea{
+  border: 4px solid #333;
+  width: 100%;
+  margin: 0px;
+
+
+}
+#replyform {
+  border: 4px solid #4CAF50;
+}
+#replybutton{
+  width: 100%;
+  text-align:center;
+  background-color: #4CAF50;
+  color: white;
+  border: 4px solid #333;
+  border-top: 0px;
+  margin: 0px;
+  padding: 0px;
+  height: 30px;
+  font-size: 100%;
+}
+#replybutton:hover{
+  background-color: green;
+}
+.tag{
+display: inline-block;
+background-color: #333;
+color: white;
+font-size: 130%;
+padding-left: 20px;
+padding-right: 20px;
+padding-top: 4px;
+padding-bottom: 4px;
+border-radius: 5px;
+margin-right: 10px;
+}
+.picture > img{
     display: block;
     width:100%;
     max-width:400px;
     margin: 0 auto;
+}
+.search {
+  background-color: #333;
+  margin-top: 20px;
+}
+.notes {
+  position: absolute;
+  bottom: 0px;
 }
