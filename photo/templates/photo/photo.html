@@ -10,9 +10,13 @@
 </div>
 <div class="tags">
 <p>Tags associated with the picture  </p>
+{% if photo.tags%}
+  <div class="tag">None</div>
+{% else %}
 {% for item in photo.tags.all %}
   <div class="tag">{{item}}</div>
 {% endfor %}
+{% endif %}
 </div>
 {% if photo.description %}
 <div class="description">
