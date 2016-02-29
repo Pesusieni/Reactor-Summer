@@ -45,7 +45,6 @@ class PhotoForm(ModelForm):
                     temp.append(tag)
                 except Tag.DoesNotExist:
                     tag = Tag.objects.create(name=tag_name)
-                    print(tag)
                     temp.append(tag)
 
         return temp

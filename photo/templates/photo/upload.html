@@ -6,6 +6,12 @@
     {{ form.management_form }}
         {% for field in form %}
             <br>{{ field.label_tag }} <br>{{ field }}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <a>{{error}}</a>
+            {% endfor %}
+            {% endif %}
+
 
 
     {% endfor %}

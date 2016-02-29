@@ -5,16 +5,18 @@
 <img src="{{photo.image.url}}">
 </div>
 <div class="top">
+<div>
 <a class="left">Title : {{photo.title}}</a>
 <a class="right">Uploader : {{photo.uploader}}</a>
 </div>
-<div class="tags">
 <p>Tags associated with the picture  </p>
+</div>
+<div class="tags">
 {% if photo.tags.all.first == None %}
   <div class="tag">None</div>
 {% else %}
 {% for item in photo.tags.all %}
-  <div class="tag">{{item}}</div>
+  <a class="tag" href="/search/{{item}}/">{{item}}</a>
 {% endfor %}
 {% endif %}
 </div>

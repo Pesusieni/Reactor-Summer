@@ -25,23 +25,35 @@
 .active {
     background-color: #4CAF50;
 }
-.top > a{
-background-color: #4CAF50;
-width: 47%;
-margin: 1%;
-float: left;
-padding: 4px;
-border-radius: 5px;
+.top{
+
+    background-color: #333;
+    color: white;
+    text-align: center;;
+    font-size: 140%;
+
+
+}
+.top > div{
+  overflow: hidden;
+}
+.top > div > a{
+  background-color: #4CAF50;
+  width: 47%;
+  padding: 4px;
+  border-radius: 5px;
+  margin-top: 0px;
+
+}
+.left {
+  float: left;
 }
 .right{
-  float: right;;
+  float: right;
 }
 
 .tags > p {
-  background-color: #333;
-  color: white;
-  text-align: center;;
-  font-size: 140%;
+
 
 }
 .description > p{
@@ -112,6 +124,9 @@ padding-top: 4px;
 padding-bottom: 4px;
 border-radius: 5px;
 margin-right: 10px;
+}
+.tag:hover{
+  background-color: #4CAF50;
 }
 .picture > img{
     display: block;

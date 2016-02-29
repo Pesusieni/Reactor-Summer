@@ -47,14 +47,17 @@ def upload(request):
             tempdata = form.clean_tag_list()
             temp = form.save(commit=False)
             temp.save()
-            print(tempdata)
             for item in tempdata:
                 temp.tags.add(item)
             form.save_m2m()
             return HttpResponseRedirect(reverse(photo, args=[temp.pk]))
         else:
             print(form.errors)
-
+            template = loader.get_template('photo/upload.html')
+            context = RequestContext(request, {
+                'form': form
+            })
+            return HttpResponse(template.render(context))
 
     else:
         form = PhotoForm()
@@ -70,6 +73,14 @@ def about(request):
     template = loader.get_template('photo/about.html')
     context = RequestContext(request, {
 
+    })
+    return HttpResponse(template.render(context))
+def specific_search(request,photo_tag):
+    photos = Photo.objects.filter(tags__name=photo_tag)
+    photos = photos.order_by('timestamp')[:50]
+    template = loader.get_template('photo/photos.html')
+    context = RequestContext(request, {
+    'photos' : photos
     })
     return HttpResponse(template.render(context))
 def search(request):
@@ -92,8 +103,6 @@ def search(request):
         'photos' : photos
         })
         return HttpResponse(template.render(context))
-    else:
-        pass
     template = loader.get_template('photo/search.html')
     context = RequestContext(request, {
     })
