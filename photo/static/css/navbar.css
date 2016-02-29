@@ -147,3 +147,9 @@ border: 4px solid green;
   position: absolute;
   bottom: 0px;
 }
+.front > img {
+  display: block;
+  max-height: 800px;
+  width: auto;
+  margin: 0 auto;
+}

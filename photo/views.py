@@ -47,7 +47,7 @@ def upload(request):
             tempdata = form.clean_tag_list()
             temp = form.save(commit=False)
             temp.save()
-            print(temp)
+            print(tempdata)
             for item in tempdata:
                 temp.tags.add(item)
             form.save_m2m()

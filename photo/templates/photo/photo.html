@@ -10,7 +10,7 @@
 </div>
 <div class="tags">
 <p>Tags associated with the picture  </p>
-{% if photo.tags%}
+{% if photo.tags.all.first == None %}
   <div class="tag">None</div>
 {% else %}
 {% for item in photo.tags.all %}

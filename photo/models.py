@@ -27,7 +27,7 @@ class ReplyForm(ModelForm):
     class Meta:
         model = Reply
         fields = ['nick_name','reply']
-        
+
 class PhotoForm(ModelForm):
     tags_list = CharField(required=False,max_length=255)
     class Meta:
@@ -42,7 +42,10 @@ class PhotoForm(ModelForm):
             for tag_name in tags_list.split(','):
                 try:
                     tag = Tag.objects.get(name=tag_name)
+                    temp.append(tag)
                 except Tag.DoesNotExist:
-                    tag = Tag(name=tag_name).save()
-                temp.append(tag)
+                    tag = Tag.objects.create(name=tag_name)
+                    print(tag)
+                    temp.append(tag)
+
         return temp
