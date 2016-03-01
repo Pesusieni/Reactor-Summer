@@ -10,7 +10,7 @@ Working:
 
 To improve:
 
-- refactoring code in Views to simplyfy it (search and search/id priority)
-- adding functions in models to simplyfy code (example save overlord, to make saving easier)
+- refactoring code in Views to simplify it (search and search/id priority)
+- adding functions in models to simplify code (example save overlord, to make saving easier)
 - css file cleaning
 - html files cleaning
