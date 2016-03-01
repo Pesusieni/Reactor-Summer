@@ -6,18 +6,8 @@ from django.core.urlresolvers import reverse
 
 
 def index(request):
-    #try:
     picture = Photo.objects.order_by('?').first()
-    print(picture)
-
-    template = loader.get_template('photo/index.html')
-    context = RequestContext(request, {
-        'picture' : picture,
-    })
-    return HttpResponse(template.render(context))
-
-    #except:
-    #    raise Http404
+    return render(request,'photo/index.html',{'picture':picture})
 def photo(request,picture_id):
     try:
         photo = Photo.objects.get(pk = picture_id)
@@ -33,13 +23,11 @@ def photo(request,picture_id):
     reply_list = photo.reply_set.all()
     reply_list = reply_list.order_by('-timestamp')[:100]
     replyform = ReplyForm()
-    template = loader.get_template('photo/photo.html')
-    context = RequestContext(request,{
+    return render(request,'photo/photo.html',{
     'photo' : photo,
     'replyform' : replyform,
     'reply_list' : reply_list
     })
-    return HttpResponse(template.render(context))
 def upload(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST,request.FILES)
@@ -52,58 +40,25 @@ def upload(request):
             form.save_m2m()
             return HttpResponseRedirect(reverse(photo, args=[temp.pk]))
         else:
-            print(form.errors)
-            template = loader.get_template('photo/upload.html')
-            context = RequestContext(request, {
-                'form': form
-            })
-            return HttpResponse(template.render(context))
-
-    else:
-        form = PhotoForm()
-    template = loader.get_template('photo/upload.html')
-    context = RequestContext(request, {
-        'form': form
-    })
-    return HttpResponse(template.render(context))
-
+            return render(request,'photo/upload.html',{'form': form})
+    form = PhotoForm()
+    return render(request,'photo/upload.html',{'form': form})
 
 def about(request):
-
-    template = loader.get_template('photo/about.html')
-    context = RequestContext(request, {
-
-    })
-    return HttpResponse(template.render(context))
+    return render(request,'photo/about.html')
 def specific_search(request,photo_tag):
     photos = Photo.objects.filter(tags__name=photo_tag)
     photos = photos.order_by('timestamp')[:50]
-    template = loader.get_template('photo/photos.html')
-    context = RequestContext(request, {
-    'photos' : photos
-    })
-    return HttpResponse(template.render(context))
+    return render(request,'photo/photos.html',{'photos' : photos})
 def search(request):
     if request.method == "POST":
         data = request.POST['tags'].lower()
-        print(data)
         if len(data)==0:
             photos = Photo.objects.order_by('?')[:50]
-            template = loader.get_template('photo/photos.html')
-            context = RequestContext(request, {
-            'photos' : photos
-            })
-            return HttpResponse(template.render(context))
+            return render(request,'photo/photos.html',{'photos' : photos})
         photos = Photo.objects
         for item in data.split(','):
             photos = photos.filter(tags__name=item)
         photos = photos.order_by('timestamp')[:50]
-        template = loader.get_template('photo/photos.html')
-        context = RequestContext(request, {
-        'photos' : photos
-        })
-        return HttpResponse(template.render(context))
-    template = loader.get_template('photo/search.html')
-    context = RequestContext(request, {
-    })
-    return HttpResponse(template.render(context))
+        return render(request,'photo/photos.html',{'photos' : photos})
+    return render(request,'photo/search.html')

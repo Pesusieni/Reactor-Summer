@@ -1,7 +1,7 @@
 {% extends "photo/base.html" %}
 {% block content %}
 <div class="photos">
-  {% if photos%}
+  {% if photos %}
   {% for item in photos%}
     <a href="/picture/{{item.pk}}"><img src="{{item.image.url}}"></a>
   {% endfor %}
