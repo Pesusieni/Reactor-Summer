@@ -4,20 +4,19 @@ from django.http import HttpResponse, Http404, JsonResponse, HttpResponseForbidd
 from django.template import RequestContext, loader
 from django.core.urlresolvers import reverse
 
-
 def index(request):
     picture = Photo.objects.order_by('?').first()
     return render(request,'photo/index.html',{'picture':picture})
 def photo(request,picture_id):
     try:
-        photo = Photo.objects.get(pk = picture_id)
+        photo = Photo.objects.get(code = picture_id)
     except:
         raise Http404
     if request.method == 'POST':
         form = ReplyForm(request.POST)
         if form.is_valid():
             temp = form.save(commit = False)
-            temp.photo_id = picture_id
+            temp.photo_id = photo.id
             temp.save()
 
     reply_list = photo.reply_set.all()
@@ -38,7 +37,7 @@ def upload(request):
             for item in tempdata:
                 temp.tags.add(item)
             form.save_m2m()
-            return HttpResponseRedirect(reverse(photo, args=[temp.pk]))
+            return HttpResponseRedirect(reverse(photo, args=[temp.code]))
         else:
             return render(request,'photo/upload.html',{'form': form})
     form = PhotoForm()

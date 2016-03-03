@@ -1,5 +1,7 @@
 from django.db import models
 from django.forms import ModelForm , CharField
+import uuid
+
 
 class Tag(models.Model):
     name = models.CharField(unique=True,max_length=20)
@@ -8,14 +10,13 @@ class Tag(models.Model):
 
 
 class Photo(models.Model):
+    code = models.UUIDField(unique = True,default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=25)
     description = models.TextField(null=True,blank=True)
     tags = models.ManyToManyField(Tag,blank=True)
     uploader = models.CharField(max_length=25)
     timestamp = models.DateTimeField(auto_now_add=True,blank=True)
     image = models.ImageField(upload_to='photos/')
-
-
     def __str__(self):
         return self.title
 class Reply(models.Model):

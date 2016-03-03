@@ -3,7 +3,7 @@
 <div class="photos">
   {% if photos %}
   {% for item in photos%}
-    <a href="/picture/{{item.pk}}"><img src="{{item.image.url}}"></a>
+    <a href="/picture/{{item.code}}/"><img src="{{item.image.url}}"></a>
   {% endfor %}
   {% else %}
   <p>No photos find with the specified tags</p>
