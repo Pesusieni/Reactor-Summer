@@ -37,19 +37,19 @@
 .top > div{
   overflow: hidden;
 }
+
 .top > div > a{
   background-color: #4CAF50;
-  width: 47%;
-  padding: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  width: 33.33333%;
   border-radius: 5px;
   margin-top: 0px;
+  float: left;
 
 }
-.left {
-  float: left;
-}
-.right{
-  float: right;
+#middle{
+  background-color: #333;
 }
 
 .tags > p {

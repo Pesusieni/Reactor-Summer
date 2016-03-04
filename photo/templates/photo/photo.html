@@ -1,38 +1,38 @@
 {% extends "photo/base.html" %}
 {% block content %}
-{{photo.tags_list.all}}
 <div class="picture">
-<img src="{{photo.image.url}}">
+  <img src="{{photo.image.url}}">
 </div>
 <div class="top">
-<div>
-<a class="left">Title : {{photo.title}}</a>
-<a class="right">Uploader : {{photo.uploader}}</a>
-</div>
-<p>Tags associated with the picture  </p>
+  <div>
+    <a class="left">Title : {{photo.title}}</a>
+    <a class="middle" id="middle">Created : {{photo.timestamp}}</a>
+    <a class="right">Uploader : {{photo.uploader}}</a>
+  </div>
+  <p>Tags associated with the picture  </p>
 </div>
 <div class="tags">
-{% if photo.tags.all.first == None %}
-  <div class="tag">None</div>
-{% else %}
-{% for item in photo.tags.all %}
-  <a class="tag" href="/search/{{item}}/">{{item}}</a>
-{% endfor %}
-{% endif %}
+  {% if photo.tags.all.first == None %}
+    <div class="tag">None</div>
+    {% else %}
+    {% for item in photo.tags.all %}
+      <a class="tag" href="/search/{{item}}/">{{item}}</a>
+    {% endfor %}
+  {% endif %}
 </div>
 {% if photo.description %}
-<div class="description">
-<p>{{photo.description}}</p>
-</div>
+  <div class="description">
+    <p>{{photo.description}}</p>
+  </div>
 {% endif %}
 <div class="reply">
   <h2>Replies</h2>
-{% for item in reply_list %}
-  <div>
-  <h3>Nick Name :{{item.nick_name}}</h3>
-  <p>{{item.reply}}</p>
-</div>
-{% endfor %}
+    {% for item in reply_list %}
+      <div>
+        <h3>Nick Name :{{item.nick_name}}</h3>
+        <p>{{item.reply}}</p>
+      </div>
+    {% endfor %}
 </div>
 <div class = "form">
 <form method="post" action="" id="replyform" enctype="multipart/form-data">
